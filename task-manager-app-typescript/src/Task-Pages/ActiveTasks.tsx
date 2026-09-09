@@ -144,7 +144,7 @@ export function ActiveTasks({
                         </button>
 
                         {openMenuId === task.id && (
-                          <div className="task-options-menu" aria-hidden="true">
+                          <div className="task-options-menu" >
                             <button
                               type="button"
                               onClick={() => onOpenEditTaskModal(task)}

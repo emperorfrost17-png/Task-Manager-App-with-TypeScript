@@ -132,7 +132,11 @@ export function OverdueTasks({
                                 ? "1 day ago"
                                 : `${TimeDifferenceDays} days ago`}
                             </span>
-                            <span> Created At: {dayjs(task.createdAt).format("h:mm A")}</span>
+                            <span>
+                              {" "}
+                              Created At:{" "}
+                              {dayjs(task.createdAt).format("h:mm A")}
+                            </span>
                           </div>
                         </div>
                         <button
@@ -148,7 +152,7 @@ export function OverdueTasks({
                           <span aria-hidden="true">...</span>
                         </button>
                         {openMenuId === task.id && (
-                          <div className="task-options-menu" aria-hidden="true">
+                          <div className="task-options-menu">
                             <button
                               type="button"
                               onClick={() => onOpenEditTaskModal(task)}

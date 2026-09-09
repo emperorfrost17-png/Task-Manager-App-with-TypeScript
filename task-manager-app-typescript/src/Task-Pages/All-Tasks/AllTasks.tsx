@@ -181,7 +181,7 @@ export function AllTasks({
                         Conditionally render the task options menu if the openMenuId matches the current task's ID. This menu provides options to edit or delete the task.
                       */}
                       {openMenuId === task.id && (
-                        <div className="task-options-menu" aria-hidden="true">
+                        <div className="task-options-menu" >
                           <button
                             type="button"
                             onClick={() => onOpenEditTaskModal(task)}

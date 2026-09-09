@@ -134,6 +134,7 @@ function App() {
           onClose={onCloseEditTaskModal}
           setTasks={setTasks}
           task={editingTask} // Pass the task to be edited as a prop to the EditTask component
+          
         />
       )}
 
