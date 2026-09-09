@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background: #fbf7ef;
+  color: #34283b;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #fbf7ef;
+}
+
+.main-content {
+  flex: 1;
+  background: #fbf7ef;
+  min-height: 100vh;
+}
+
+.upcoming-card {
+  border: 1px solid #eee3d6;
+  border-radius: 12px;
+  background: #fffdfa;
+  box-shadow: 0 8px 20px rgba(70, 49, 42, 0.07);
+  padding: 18px;
+}
+
+.upcoming-header {
+  margin-bottom: 18px;
+}
+
+.upcoming-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: #397267;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  line-height: 1;
+}
+
+.upcoming-label-text {
+  display: inline-block;
+  color: #397267;
+}
+
+.calendar-icon {
+  width: 11px;
+  height: 11px;
+  box-sizing: border-box;
+  flex: 0 0 11px;
+  border: 1.5px solid #397267;
+  border-radius: 2px;
+  position: relative;
+}
+
+.calendar-icon::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  border-top: 1.5px solid #397267;
+}
+
+.calendar-icon::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 2px;
+  width: 5px;
+  height: 3px;
+  border-left: 1.5px solid #397267;
+  border-right: 1.5px solid #397267;
+}
+
+.upcoming-card h3 {
+  margin: 0 0 7px;
+  color: #34283b;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.upcoming-event h3 {
+  margin-bottom: 7px;
+}
+
+.upcoming-card p {
+  margin: 0;
+  color: #97899b;
+  font-size: 0.7rem;
+}
+
+.upcoming-card hr {
+  margin: 12px 0;
+  border: 0;
+  border-top: 1px solid #eee3d6;
+}
+
+/* Responsive Design Media Queries */
+
+/* Mobile devices (< 481px) */
+@media (max-width: 480px) {
+  .app-shell {
+    flex-direction: row;
+  }
+
+  .main-content {
+    flex: 1;
+    width: 100%;
+  }
+
+  .upcoming-card {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .upcoming-card h3 {
+    font-size: 0.75rem;
+  }
+
+  .upcoming-card p {
+    font-size: 0.65rem;
+  }
+
+  .upcoming-label {
+    font-size: 0.6rem;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .upcoming-card {
+    padding: 16px;
+  }
+
+  .upcoming-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .upcoming-card p {
+    font-size: 0.68rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .upcoming-card {
+    padding: 16px;
+  }
+}
+
+/* Desktops (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .upcoming-card {
+    padding: 18px;
+  }
+}
+
+/* Extra large screens (1201px+) */
+@media (min-width: 1201px) {
+  .upcoming-card {
+    padding: 18px;
+  }
+}

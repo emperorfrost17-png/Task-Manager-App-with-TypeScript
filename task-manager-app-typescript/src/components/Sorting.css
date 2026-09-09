@@ -1,0 +1,128 @@
+.sortby {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  color: #7d697b;
+}
+
+.sortby-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #6d5e6c;
+}
+
+.sortby-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sortby-select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid #6e5d6d;
+  border-bottom: 1.5px solid #6e5d6d;
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+.sortby select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 126px;
+  padding: 9px 34px 9px 12px;
+  border: 1px solid #eadfc8;
+  border-radius: 999px;
+  background: #fffdf9;
+  color: #352b38;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(70, 49, 42, 0.05);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.sortby select:hover {
+  border-color: #d9c8a4;
+  box-shadow: 0 4px 10px rgba(70, 49, 42, 0.08);
+}
+
+.sortby select:focus {
+  outline: none;
+  border-color: #bb8b46;
+  box-shadow: 0 0 0 3px rgba(187, 139, 70, 0.12);
+}
+
+.sortby option {
+  font-weight: 600;
+}
+
+/* Responsive Design Media Queries */
+
+/* Mobile devices (< 481px) */
+@media (max-width: 480px) {
+  .sortby {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 0 0 14px;
+  }
+
+  .sortby-label {
+    font-size: 0.68rem;
+  }
+
+  .sortby select {
+    min-width: 100px;
+    padding: 8px 30px 8px 10px;
+    font-size: 0.68rem;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sortby {
+    gap: 12px;
+    margin: 0 0 16px;
+  }
+
+  .sortby-label {
+    font-size: 0.7rem;
+  }
+
+  .sortby select {
+    min-width: 120px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sortby {
+    gap: 10px;
+  }
+
+  .sortby select {
+    min-width: 126px;
+  }
+}
+
+/* Desktops and extra-large screens (1025px+) */
+@media (min-width: 1025px) {
+  .sortby {
+    gap: 10px;
+    margin: 0 0 18px;
+  }
+}

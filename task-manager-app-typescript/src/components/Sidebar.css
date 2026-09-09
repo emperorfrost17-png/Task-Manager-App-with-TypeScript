@@ -1,0 +1,479 @@
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: #30233a;
+  color: #f8f1e7;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 14px 14px;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.brand-mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: #ffb51b;
+  position: relative;
+  box-shadow: inset 0 0 0 2px rgba(48, 35, 58, 0.2);
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 5px;
+  background: #30233a;
+}
+
+.brand-text {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.brand-tagline {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+.workspace-button {
+  width: 100%;
+  border: 0;
+  border-radius: 11px;
+  background: #ffb51b;
+  color: #30233a;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 10px 12px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.workspace-button:hover {
+  background: #ffc23d;
+  box-shadow: 0 4px 0 #d88e00;
+}
+
+.workspace-button:active {
+  background: #e9a000;
+  box-shadow: 0 1px 0 #b87400;
+  transform: translateY(3px);
+}
+
+.workspace-button:focus-visible {
+  outline: 3px solid #f8f1e7;
+  outline-offset: 3px;
+}
+
+.workspace-label {
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.52);
+  text-transform: uppercase;
+  margin: 10px 0 8px;
+}
+
+.workspace-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 10px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.96rem;
+  margin: 4px 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.sidebar-link-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  color: currentColor;
+  opacity: 0.78;
+  transform: scale(1.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-link-icon-all,
+.sidebar-link-icon-active,
+.sidebar-link-icon-completed,
+.sidebar-link-icon-overdue {
+  font-size: 0.9rem;
+}
+
+.workspace-item:focus-visible {
+  outline: 2px solid #ffcf5b;
+  outline-offset: 2px;
+}
+
+.workspace-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fffaf2;
+}
+
+.workspace-item:not(.active):hover .sidebar-link-icon {
+  color: #ffb51b;
+}
+
+.workspace-item:active {
+  background: rgba(255, 181, 27, 0.2);
+  transform: translateY(1px);
+}
+
+.workspace-item.active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.workspace-item .count {
+  margin-left: auto;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.72rem;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.workspace-item:not(.active):hover .count {
+  background: rgba(255, 181, 27, 0.22);
+  color: #ffcf5b;
+}
+
+.sidebar-footer-card {
+  margin-top: auto;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 181, 27, 0.12) 0%,
+    rgba(255, 181, 27, 0.06) 100%
+  );
+  border: 1px solid rgba(255, 181, 27, 0.2);
+  border-radius: 12px;
+  padding: 14px 12px;
+  color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.sidebar-footer-label {
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 181, 27, 0.9);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-footer-label i {
+  font-size: 0.7rem;
+}
+
+.sidebar-footer-text {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.user-box {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #d1d5db;
+  color: #2a1f3d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.taskflow-header,
+.sidebar-nav,
+.sidebar-footer,
+.progress-header,
+.progress-bar-container,
+.task-count,
+.priority-dot,
+.taskflow-icon,
+.sidebar-link {
+  display: none;
+}
+
+/* Responsive Design Media Queries */
+
+/* Responsive Design Media Queries */
+
+/* Mobile devices (< 481px) */
+@media (max-width: 480px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 300ms ease;
+    z-index: 999;
+    padding: 18px 14px 14px;
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .brand-box {
+    margin-bottom: 16px;
+  }
+
+  .workspace-button {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+
+  .workspace-label {
+    font-size: 0.6rem;
+  }
+
+  .workspace-item {
+    padding: 9px 10px;
+    font-size: 0.92rem;
+  }
+
+  .workspace-item .count {
+    font-size: 0.68rem;
+  }
+
+  .sidebar-footer-card {
+    padding: 12px;
+  }
+
+  .sidebar-footer-text {
+    font-size: 0.9rem;
+  }
+
+  .user-name {
+    font-size: 0.75rem;
+  }
+
+  .user-role {
+    font-size: 0.64rem;
+  }
+}
+
+/* Tablets and up (481px+) */
+@media (min-width: 481px) {
+  .sidebar {
+    position: static;
+    transform: none !important;
+  }
+
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+    padding: 14px 10px;
+  }
+
+  .brand-text {
+    font-size: 0.9rem;
+  }
+
+  .workspace-button {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .workspace-item {
+    font-size: 0.9rem;
+    padding: 9px 8px;
+    gap: 10px;
+  }
+
+  .workspace-item .count {
+    font-size: 0.65rem;
+  }
+
+  .sidebar-footer-text {
+    font-size: 0.9rem;
+  }
+
+  .user-name {
+    font-size: 0.75rem;
+  }
+
+  .user-role {
+    font-size: 0.65rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    padding: 16px 12px;
+  }
+
+  .brand-text {
+    font-size: 0.95rem;
+  }
+
+  .workspace-item {
+    font-size: 0.93rem;
+  }
+}
+
+/* Desktops (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .sidebar {
+    width: 235px;
+    min-width: 235px;
+  }
+}
+
+/* Extra large screens (1201px+) */
+@media (min-width: 1201px) {
+  .sidebar {
+    width: 250px;
+    min-width: 250px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    min-width: 200px;
+    padding: 14px 10px;
+  }
+
+  .brand-text {
+    font-size: 0.9rem;
+  }
+
+  .workspace-button {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .workspace-item {
+    font-size: 0.9rem;
+    padding: 9px 8px;
+    gap: 10px;
+  }
+
+  .workspace-item .count {
+    font-size: 0.65rem;
+  }
+
+  .sidebar-footer-text {
+    font-size: 0.9rem;
+  }
+
+  .user-name {
+    font-size: 0.75rem;
+  }
+
+  .user-role {
+    font-size: 0.65rem;
+  }
+}
+
+/* Small laptops (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    padding: 16px 12px;
+  }
+
+  .brand-text {
+    font-size: 0.95rem;
+  }
+
+  .workspace-item {
+    font-size: 0.93rem;
+  }
+}
+
+/* Desktops (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .sidebar {
+    width: 235px;
+    min-width: 235px;
+  }
+}
+
+/* Extra large screens (1201px+) */
+@media (min-width: 1201px) {
+  .sidebar {
+    width: 250px;
+    min-width: 250px;
+  }
+}
