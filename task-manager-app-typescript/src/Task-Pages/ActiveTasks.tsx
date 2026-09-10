@@ -2,8 +2,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
-import { TaskCheckbox } from "../components/TaskCheckbox";
-import { DeleteConfirmation } from "../components/DeleteConfirmation";
+import {TaskList} from "./TaskList";
 import type { Task } from "../App";
 import type { ChangeEvent } from "react";
 import dayjs from "dayjs";
@@ -94,6 +93,7 @@ export function ActiveTasks({
               </div>
               <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
+                
                 {filteredTasks.filter((task) => !task.completed).length ===
                   0 && (
                   <div className="empty-state">
@@ -113,79 +113,8 @@ export function ActiveTasks({
                     </button>
                   </div>
                 )}
-                {filteredTasks
-                  .filter((task) => !task.completed)
-                  .map((task) => {
-                    return (
-                      <article className="task-card" key={task.id}>
-                        <TaskCheckbox
-                          completed={task.completed}
-                          title={task.title}
-                          onToggle={() => handleCompletedTasks(task.id)}
-                        />
-                        <div>
-                          <h3>{task.title}</h3>
-                          <p>{task.description}</p>
-                          <div className="task-meta">
-                            <span
-                              className={`priority-tag priority-tag-${task.priority}`}
-                            >
-                              {task.priority}
-                            </span>
-                            <span>{dayjs(task.dueDate).format("MMM D")}</span>
-                            <span>
-                              {" "}
-                              Created At:{" "}
-                              {dayjs(task.createdAt).format("h:mm A")}
-                            </span>
-                          </div>
-                        </div>
-                        <button
-                          className="task-more-button"
-                          type="button"
-                          aria-label={`More options for ${task.title}`}
-                          onClick={() =>
-                            setOpenMenuId(
-                              openMenuId === task.id ? null : task.id,
-                            )
-                          }
-                        >
-                          <span aria-hidden="true">...</span>
-                        </button>
-
-                        {openMenuId === task.id && (
-                          <div className="task-options-menu">
-                            <button
-                              type="button"
-                              onClick={() => onOpenEditTaskModal(task)}
-                            >
-                              <span aria-hidden="true">✎</span> Edit
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setDeleteConfirmationTaskId(task.id)}
-                            >
-                              <i
-                                className="fa-solid fa-trash-can"
-                                aria-hidden="true"
-                              />{" "}
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                        {deleteConfirmationTaskId === task.id && (
-                          <DeleteConfirmation
-                            taskId={task.id}
-                            handleDeleteTask={handleDeleteTask}
-                            setDeleteConfirmationTaskId={
-                              setDeleteConfirmationTaskId
-                            }
-                            setOpenMenuId={setOpenMenuId}
-                          />
-                        )}
-                      </article>
-                    );
-                  })}
+                <TaskList tasks={filteredTasks.filter((task) => !task.completed)} handleCompletedTasks={handleCompletedTasks} openMenuId={openMenuId} setOpenMenuId={setOpenMenuId} onOpenEditTaskModal={onOpenEditTaskModal} handleDeleteTask={handleDeleteTask} deleteConfirmationTaskId={deleteConfirmationTaskId} setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}/>
+                
               </div>
             </section>
 

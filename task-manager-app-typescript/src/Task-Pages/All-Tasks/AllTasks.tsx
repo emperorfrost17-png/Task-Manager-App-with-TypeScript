@@ -2,12 +2,13 @@ import { Sidebar } from "../../components/Sidebar";
 import { Header } from "../../components/Header";
 import { Completion } from "../../components/Completion";
 import { Sorting } from "../../components/Sorting";
-import { TaskCheckbox } from "../../components/TaskCheckbox";
-import { DeleteConfirmation } from "../../components/DeleteConfirmation";
+
+export {TaskList} from "../TaskList";
 import type { Task } from "../../App";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 import { useState, type ChangeEvent } from "react";
+import { TaskList } from "../TaskList";
 interface AllTasksProps {
   tasks: Task[];
   onOpenTaskModal: () => void;
@@ -132,93 +133,8 @@ export function AllTasks({
                       </button>
                     </div>
                   ))}
-
-                {filteredTasks.map((task) => {
-                  return (
-                    <article
-                      className="task-card"
-                      key={task.id}
-                      style={{ opacity: task.completed ? "0.7" : "1" }}
-                    >
-                      <TaskCheckbox
-                        completed={task.completed}
-                        title={task.title}
-                        onToggle={() => handleCompletedTasks(task.id)}
-                      />
-
-                      <div>
-                        <h3
-                          style={{
-                            textDecoration: task.completed
-                              ? "line-through"
-                              : "none",
-                          }}
-                        >
-                          {task.title}
-                        </h3>
-                        <p>{task.description}</p>
-                        <div className="task-meta">
-                          <span
-                            className={`priority-tag priority-tag-${task.priority}`}
-                          >
-                            {task.priority}
-                          </span>
-                          <span>{dayjs(task.dueDate).format("MMM D")}</span>
-                          <span>
-                            {" "}
-                            Created At: {dayjs(task.createdAt).format("h:mm A")}
-                          </span>
-                        </div>
-                      </div>
-                      <button
-                        className="task-more-button"
-                        type="button"
-                        aria-label={`More options for ${task.title}`}
-                        onClick={() => {
-                          // Toggle the openMenuId state to show or hide the options menu for the clicked task. If the menu is already open for this task, it will close it; otherwise, it will open it.
-                          setOpenMenuId(
-                            openMenuId === task.id ? null : task.id,
-                          );
-                        }}
-                      >
-                        <span aria-hidden="true">...</span>
-                      </button>
-                      {/*
-                        Conditionally render the task options menu if the openMenuId matches the current task's ID. This menu provides options to edit or delete the task.
-                      */}
-                      {openMenuId === task.id && (
-                        <div className="task-options-menu">
-                          <button
-                            type="button"
-                            onClick={() => onOpenEditTaskModal(task)}
-                          >
-                            <span aria-hidden="true">✎</span> Edit
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setDeleteConfirmationTaskId(task.id)}
-                          >
-                            <i
-                              className="fa-solid fa-trash-can"
-                              aria-hidden="true"
-                            />{" "}
-                            Delete
-                          </button>
-                        </div>
-                      )}
-                      {deleteConfirmationTaskId === task.id && (
-                        <DeleteConfirmation
-                          taskId={task.id}
-                          handleDeleteTask={handleDeleteTask}
-                          setDeleteConfirmationTaskId={
-                            setDeleteConfirmationTaskId
-                          }
-                          setOpenMenuId={setOpenMenuId} 
-                        />
-                      )}
-                    </article>
-                  );
-                })}
+                <TaskList tasks={filteredTasks} handleCompletedTasks={handleCompletedTasks} openMenuId={openMenuId} setOpenMenuId={setOpenMenuId} onOpenEditTaskModal={onOpenEditTaskModal} handleDeleteTask={handleDeleteTask} deleteConfirmationTaskId={deleteConfirmationTaskId} setDeleteConfirmationTaskId={setDeleteConfirmationTaskId} />
+                
               </div>
             </section>
             <Completion tasks={tasks} />

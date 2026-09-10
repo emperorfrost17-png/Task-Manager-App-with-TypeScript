@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
 import { TaskCheckbox } from "../components/TaskCheckbox";
+import { TaskList } from "./TaskList";
 import dayjs from "dayjs";
 import { useState } from "react";
 import type { Task } from "../App";
@@ -49,6 +50,14 @@ export function OverdueTasks({
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
+ const tasksWithTimeDiff = filteredTasks
+  .filter(task => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed)
+  .map(task => ({
+    ...task,
+    daysOverdue: Math.floor((dayjs().valueOf() - dayjs(task.dueDate).valueOf()) / (1000 * 60 * 60 * 24))
+  }));
+
+
 
   return (
     <>
