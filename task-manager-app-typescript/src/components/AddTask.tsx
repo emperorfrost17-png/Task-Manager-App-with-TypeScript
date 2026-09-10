@@ -88,7 +88,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
               placeholder="Give it a clear, kind name"
             />
           </div>
-
+        
           <div className="task-field">
             <label htmlFor="task-notes">
               Notes <em>optional</em>

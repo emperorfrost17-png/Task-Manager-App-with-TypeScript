@@ -41,7 +41,8 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
       setNewDueDate(task.dueDate);
     }
   }, [task]);
-  const handleSaveChanges = () => {
+  const handleSaveChanges = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!task || !newTitle || !newPriority || !newDueDate) {
       alert("Please fill in mandatory fields before saving changes.");
       return;
@@ -69,6 +70,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="edit-task-title"
+        onSubmit={handleSaveChanges}
       >
         <div className="edit-task-heading">
           <div>
@@ -88,6 +90,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
         <div className="edit-task-field">
           <label htmlFor="edit-task-name">What needs your attention?</label>
           <input
+            required
             id="edit-task-name"
             type="text"
             value={newTitle}
@@ -136,11 +139,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
           <button className="edit-task-cancel" type="button" onClick={onClose}>
             Cancel
           </button>
-          <button
-            className="edit-task-save"
-            type="button"
-            onClick={handleSaveChanges}
-          >
+          <button className="edit-task-save" type="submit">
             Save changes
           </button>
         </div>
