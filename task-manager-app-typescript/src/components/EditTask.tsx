@@ -32,7 +32,6 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
   const handleDueDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewDueDate(event.target.value);
   };
-  // Use useEffect to initialize the form fields with the current task's data when the component mounts or when the task prop changes.
   useEffect(() => {
     if (task) {
       setNewTitle(task.title);
@@ -47,7 +46,6 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
       alert("Please fill in mandatory fields before saving changes.");
       return;
     }
-    // Update the task in the tasks state by mapping through the current tasks and replacing the task with the matching ID with the updated values.
     setTasks((currentTasks: Task[]) =>
       currentTasks.map((t) =>
         t.id === task.id

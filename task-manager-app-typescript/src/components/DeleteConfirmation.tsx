@@ -31,8 +31,6 @@ export function DeleteConfirmation({
             type="button"
             className="btn-cancel"
             onClick={() => {
-              // Handle cancellation logic here
-
               setDeleteConfirmationTaskId(null);
               setOpenMenuId(null);
             }}
@@ -43,7 +41,6 @@ export function DeleteConfirmation({
             type="button"
             className="btn-delete"
             onClick={() => {
-              // Handle task deletion logic here
               handleDeleteTask(taskId);
               setDeleteConfirmationTaskId(null);
               setOpenMenuId(null);

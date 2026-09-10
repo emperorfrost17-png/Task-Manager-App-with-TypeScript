@@ -77,15 +77,11 @@ export function TaskList({
               type="button"
               aria-label={`More options for ${task.title}`}
               onClick={() => {
-                // Toggle the openMenuId state to show or hide the options menu for the clicked task. If the menu is already open for this task, it will close it; otherwise, it will open it.
                 setOpenMenuId(openMenuId === task.id ? null : task.id);
               }}
             >
               <span aria-hidden="true">...</span>
             </button>
-            {/*
-                        Conditionally render the task options menu if the openMenuId matches the current task's ID. This menu provides options to edit or delete the task.
-                      */}
             {openMenuId === task.id && (
               <div className="task-options-menu">
                 <button type="button" onClick={() => onOpenEditTaskModal(task)}>

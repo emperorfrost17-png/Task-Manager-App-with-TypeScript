@@ -15,7 +15,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH">("MEDIUM");
-  const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD")); // Set default due date to today
+  const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD"));
 
   function savedTaskTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
@@ -31,7 +31,6 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
   }
   const addNewTask = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Create a new task object with the current state values and a unique ID, then update the tasks state and close the modal.
     if (!title || !priority || !dueDate) {
       alert("Please fill in mandatory fields before adding a task.");
       return;
@@ -70,7 +69,6 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
               className="close-task-button"
               type="button"
               aria-label="Close"
-              //This button will call the onClose function passed as a prop when clicked, allowing the parent component to handle the closing of the AddTask modal.
               onClick={onClose}
             >
               <span aria-hidden="true">×</span>

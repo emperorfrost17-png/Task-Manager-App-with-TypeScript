@@ -107,9 +107,6 @@ export function CompletedTasks({
               </div>
               <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
-                {/*
-                    Filter the tasks to only show those with a status of "active"
-                  */}
                 <TaskList
                   tasks={filteredTasks.filter((task) => task.completed)}
                   handleCompletedTasks={handleCompletedTasks}
