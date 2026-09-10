@@ -3,8 +3,11 @@ import { TaskCheckbox } from "../components/TaskCheckbox";
 import { DeleteConfirmation } from "../components/DeleteConfirmation";
 import dayjs from "dayjs";
 
+interface TaskWithOptionalOverdueDays extends Task {
+  daysOverdue?: number;
+}
 interface TaskListProps {
-  tasks: Task[];
+  tasks: TaskWithOptionalOverdueDays[];
   handleCompletedTasks: (id: string) => void;
   onOpenEditTaskModal: (task: Task) => void;
   handleDeleteTask: (taskId: string) => void;
@@ -13,6 +16,7 @@ interface TaskListProps {
   openMenuId: string | null;
   setOpenMenuId: (taskId: string | null) => void;
 }
+
 export function TaskList({
   tasks,
   handleCompletedTasks,
@@ -51,7 +55,17 @@ export function TaskList({
                 <span className={`priority-tag priority-tag-${task.priority}`}>
                   {task.priority}
                 </span>
-                <span>{dayjs(task.dueDate).format("MMM D")}</span>
+                <span
+                  className={
+                    task.daysOverdue !== undefined ? "overdue-date" : undefined
+                  }
+                >
+                  {task.daysOverdue !== undefined
+                    ? task.daysOverdue === 1
+                      ? "1 day ago"
+                      : `${task.daysOverdue} days ago`
+                    : dayjs(task.dueDate).format("MMM D")}
+                </span>
                 <span>
                   {" "}
                   Created At: {dayjs(task.createdAt).format("h:mm A")}

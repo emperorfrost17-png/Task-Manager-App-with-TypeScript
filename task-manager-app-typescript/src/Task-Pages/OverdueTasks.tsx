@@ -2,13 +2,13 @@ import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
-import { TaskCheckbox } from "../components/TaskCheckbox";
+
 import { TaskList } from "./TaskList";
 import dayjs from "dayjs";
 import { useState } from "react";
 import type { Task } from "../App";
 import type { ChangeEvent } from "react";
-import { DeleteConfirmation } from "../components/DeleteConfirmation";
+
 interface OverdueTasksProps {
   tasks: Task[];
   onOpenTaskModal: () => void;
@@ -50,14 +50,17 @@ export function OverdueTasks({
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
- const tasksWithTimeDiff = filteredTasks
-  .filter(task => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed)
-  .map(task => ({
-    ...task,
-    daysOverdue: Math.floor((dayjs().valueOf() - dayjs(task.dueDate).valueOf()) / (1000 * 60 * 60 * 24))
-  }));
-
-
+  const tasksWithTimeDiff = filteredTasks
+    .filter(
+      (task) => dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed,
+    )
+    .map((task) => ({
+      ...task,
+      daysOverdue: Math.floor(
+        (dayjs().valueOf() - dayjs(task.dueDate).valueOf()) /
+          (1000 * 60 * 60 * 24),
+      ),
+    }));
 
   return (
     <>
@@ -108,96 +111,16 @@ export function OverdueTasks({
               </div>
               <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
-                {/*
-                    Filter the tasks to only show those with a status of "active"
-                  */}
-                {filteredTasks
-                  // Filter the tasks to only show those that are overdue and not completed
-                  //I added 'day' after dayjs() to ensure that the comparison is done at the day level, ignoring the time aspect.
-                  .filter(
-                    (task) =>
-                      dayjs(task.dueDate).isBefore(dayjs(), "day") &&
-                      !task.completed,
-                  )
-                  .map((task) => {
-                    const TimeDifferenceMs =
-                      dayjs().valueOf() - dayjs(task.dueDate).valueOf();
-                    const TimeDifferenceDays = Math.floor(
-                      TimeDifferenceMs / (1000 * 60 * 60 * 24),
-                    );
-                    return (
-                      <article className="task-card" key={task.id}>
-                        <TaskCheckbox
-                          completed={task.completed}
-                          title={task.title}
-                          onToggle={() => handleCompletedTasks(task.id)}
-                        />
-                        <div>
-                          <h3>{task.title}</h3>
-                          <p>{task.description}</p>
-                          <div className="task-meta">
-                            <span
-                              className={`priority-tag priority-tag-${task.priority}`}
-                            >
-                              {task.priority}
-                            </span>
-                            <span>
-                              {TimeDifferenceDays === 1
-                                ? "1 day ago"
-                                : `${TimeDifferenceDays} days ago`}
-                            </span>
-                            <span>
-                              {" "}
-                              Created At:{" "}
-                              {dayjs(task.createdAt).format("h:mm A")}
-                            </span>
-                          </div>
-                        </div>
-                        <button
-                          className="task-more-button"
-                          type="button"
-                          aria-label={`More options for ${task.title}`}
-                          onClick={() =>
-                            setOpenMenuId(
-                              openMenuId === task.id ? null : task.id,
-                            )
-                          }
-                        >
-                          <span aria-hidden="true">...</span>
-                        </button>
-                        {openMenuId === task.id && (
-                          <div className="task-options-menu">
-                            <button
-                              type="button"
-                              onClick={() => onOpenEditTaskModal(task)}
-                            >
-                              <span aria-hidden="true">✎</span> Edit
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setDeleteConfirmationTaskId(task.id)}
-                            >
-                              <i
-                                className="fa-solid fa-trash-can"
-                                aria-hidden="true"
-                              />{" "}
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                        {deleteConfirmationTaskId === task.id && (
-                          <DeleteConfirmation
-                            taskId={task.id}
-                            handleDeleteTask={handleDeleteTask}
-                            setDeleteConfirmationTaskId={
-                              setDeleteConfirmationTaskId
-                            }
-                            setOpenMenuId={setOpenMenuId}
-                          />
-                        )}
-                      </article>
-                    );
-                  })}
+                <TaskList
+                  tasks={tasksWithTimeDiff}
+                  handleCompletedTasks={handleCompletedTasks}
+                  openMenuId={openMenuId}
+                  setOpenMenuId={setOpenMenuId}
+                  onOpenEditTaskModal={onOpenEditTaskModal}
+                  handleDeleteTask={handleDeleteTask}
+                  deleteConfirmationTaskId={deleteConfirmationTaskId}
+                  setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
+                />
               </div>
             </section>
 

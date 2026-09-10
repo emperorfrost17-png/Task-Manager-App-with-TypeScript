@@ -182,6 +182,13 @@
   font-size: 0.72rem;
 }
 
+.overdue-date {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 .priority-tag {
   padding: 3px 7px;
   border-radius: 999px;

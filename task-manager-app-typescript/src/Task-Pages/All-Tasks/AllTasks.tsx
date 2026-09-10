@@ -3,12 +3,13 @@ import { Header } from "../../components/Header";
 import { Completion } from "../../components/Completion";
 import { Sorting } from "../../components/Sorting";
 
-export {TaskList} from "../TaskList";
+export { TaskList } from "../TaskList";
 import type { Task } from "../../App";
 import "./AllTasks.css";
 import dayjs from "dayjs";
 import { useState, type ChangeEvent } from "react";
 import { TaskList } from "../TaskList";
+
 interface AllTasksProps {
   tasks: Task[];
   onOpenTaskModal: () => void;
@@ -52,6 +53,22 @@ export function AllTasks({
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
+  const tasksWithTimeDiff = filteredTasks.map((task) => {
+    const isOverdue =
+      dayjs(task.dueDate).isBefore(dayjs(), "day") && !task.completed;
+
+    if (!isOverdue) {
+      return task;
+    }
+
+    return {
+      ...task,
+      daysOverdue: Math.floor(
+        (dayjs().valueOf() - dayjs(task.dueDate).valueOf()) /
+          (1000 * 60 * 60 * 24),
+      ),
+    };
+  });
 
   return (
     <>
@@ -133,8 +150,16 @@ export function AllTasks({
                       </button>
                     </div>
                   ))}
-                <TaskList tasks={filteredTasks} handleCompletedTasks={handleCompletedTasks} openMenuId={openMenuId} setOpenMenuId={setOpenMenuId} onOpenEditTaskModal={onOpenEditTaskModal} handleDeleteTask={handleDeleteTask} deleteConfirmationTaskId={deleteConfirmationTaskId} setDeleteConfirmationTaskId={setDeleteConfirmationTaskId} />
-                
+                <TaskList
+                  tasks={tasksWithTimeDiff}
+                  handleCompletedTasks={handleCompletedTasks}
+                  openMenuId={openMenuId}
+                  setOpenMenuId={setOpenMenuId}
+                  onOpenEditTaskModal={onOpenEditTaskModal}
+                  handleDeleteTask={handleDeleteTask}
+                  deleteConfirmationTaskId={deleteConfirmationTaskId}
+                  setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
+                />
               </div>
             </section>
             <Completion tasks={tasks} />
