@@ -3,6 +3,7 @@ import { Header } from "../../components/Header";
 import { Completion } from "../../components/Completion";
 import { Sorting } from "../../components/Sorting";
 import { TaskCheckbox } from "../../components/TaskCheckbox";
+import { DeleteConfirmation } from "../../components/DeleteConfirmation";
 import type { Task } from "../../App";
 import "./AllTasks.css";
 import dayjs from "dayjs";
@@ -21,6 +22,8 @@ interface AllTasksProps {
   searchQuery: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   filteredTasks: Task[];
+  deleteConfirmationTaskId: string | null;
+  setDeleteConfirmationTaskId: (taskId: string | null) => void;
 }
 export function AllTasks({
   tasks,
@@ -36,6 +39,8 @@ export function AllTasks({
   searchQuery,
   handleSearchChange,
   filteredTasks,
+  deleteConfirmationTaskId,
+  setDeleteConfirmationTaskId,
 }: AllTasksProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -127,6 +132,7 @@ export function AllTasks({
                       </button>
                     </div>
                   ))}
+
                 {filteredTasks.map((task) => {
                   return (
                     <article
@@ -135,7 +141,7 @@ export function AllTasks({
                       style={{ opacity: task.completed ? "0.7" : "1" }}
                     >
                       <TaskCheckbox
-                        completed={task.completed} 
+                        completed={task.completed}
                         title={task.title}
                         onToggle={() => handleCompletedTasks(task.id)}
                       />
@@ -181,7 +187,7 @@ export function AllTasks({
                         Conditionally render the task options menu if the openMenuId matches the current task's ID. This menu provides options to edit or delete the task.
                       */}
                       {openMenuId === task.id && (
-                        <div className="task-options-menu" >
+                        <div className="task-options-menu">
                           <button
                             type="button"
                             onClick={() => onOpenEditTaskModal(task)}
@@ -190,7 +196,7 @@ export function AllTasks({
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleDeleteTask(task.id)}
+                            onClick={() => setDeleteConfirmationTaskId(task.id)}
                           >
                             <i
                               className="fa-solid fa-trash-can"
@@ -199,6 +205,16 @@ export function AllTasks({
                             Delete
                           </button>
                         </div>
+                      )}
+                      {deleteConfirmationTaskId === task.id && (
+                        <DeleteConfirmation
+                          taskId={task.id}
+                          handleDeleteTask={handleDeleteTask}
+                          setDeleteConfirmationTaskId={
+                            setDeleteConfirmationTaskId
+                          }
+                          setOpenMenuId={setOpenMenuId} 
+                        />
                       )}
                     </article>
                   );

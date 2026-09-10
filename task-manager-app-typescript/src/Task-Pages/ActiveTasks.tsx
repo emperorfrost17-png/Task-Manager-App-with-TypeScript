@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
 import { TaskCheckbox } from "../components/TaskCheckbox";
+import { DeleteConfirmation } from "../components/DeleteConfirmation";
 import type { Task } from "../App";
 import type { ChangeEvent } from "react";
 import dayjs from "dayjs";
@@ -21,6 +22,8 @@ interface ActiveTasksProps {
   searchQuery: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   filteredTasks: Task[];
+  deleteConfirmationTaskId: string | null;
+  setDeleteConfirmationTaskId: (taskId: string | null) => void;
 }
 export function ActiveTasks({
   tasks,
@@ -35,6 +38,8 @@ export function ActiveTasks({
   searchQuery,
   handleSearchChange,
   filteredTasks,
+  deleteConfirmationTaskId,
+  setDeleteConfirmationTaskId,
 }: ActiveTasksProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -82,14 +87,15 @@ export function ActiveTasks({
                 <div>
                   <h2>Active tasks</h2>
                   <p>
-                    {filteredTasks.filter((task) => !task.completed).length} things in
-                    view
+                    {filteredTasks.filter((task) => !task.completed).length}{" "}
+                    things in view
                   </p>
                 </div>
               </div>
               <Sorting handleSortChange={handleSortChange} sortBy={sortBy} />
               <div className="task-list">
-                {(filteredTasks.filter((task) => !task.completed).length === 0) && (
+                {filteredTasks.filter((task) => !task.completed).length ===
+                  0 && (
                   <div className="empty-state">
                     <div className="empty-state-icon">
                       <i className="fa-solid fa-inbox" aria-hidden="true" />
@@ -127,7 +133,11 @@ export function ActiveTasks({
                               {task.priority}
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
-                            <span> Created At: {dayjs(task.createdAt).format("h:mm A")}</span>
+                            <span>
+                              {" "}
+                              Created At:{" "}
+                              {dayjs(task.createdAt).format("h:mm A")}
+                            </span>
                           </div>
                         </div>
                         <button
@@ -144,7 +154,7 @@ export function ActiveTasks({
                         </button>
 
                         {openMenuId === task.id && (
-                          <div className="task-options-menu" >
+                          <div className="task-options-menu">
                             <button
                               type="button"
                               onClick={() => onOpenEditTaskModal(task)}
@@ -153,7 +163,7 @@ export function ActiveTasks({
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleDeleteTask(task.id)}
+                              onClick={() => setDeleteConfirmationTaskId(task.id)}
                             >
                               <i
                                 className="fa-solid fa-trash-can"
@@ -162,6 +172,16 @@ export function ActiveTasks({
                               Delete
                             </button>
                           </div>
+                        )}
+                        {deleteConfirmationTaskId === task.id && (
+                          <DeleteConfirmation
+                            taskId={task.id}
+                            handleDeleteTask={handleDeleteTask}
+                            setDeleteConfirmationTaskId={
+                              setDeleteConfirmationTaskId
+                            }
+                            setOpenMenuId={setOpenMenuId}
+                          />
                         )}
                       </article>
                     );

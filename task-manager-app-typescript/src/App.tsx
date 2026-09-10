@@ -31,6 +31,7 @@ function App() {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState("dateCreated"); // Default sorting by "none"
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [deleteConfirmationTaskId, setDeleteConfirmationTaskId] = useState<string | null>(null); // State for the task ID to be deleted
   const onOpenEditTaskModal = (task: Task) => {
     setEditingTask(task); // Set the task to be edited in state
     setIsEditTaskModalOpen(true);
@@ -156,6 +157,8 @@ function App() {
               searchQuery={searchQuery}
               handleSearchChange={handleSearchChange}
               filteredTasks={filteredTasks}
+              deleteConfirmationTaskId={deleteConfirmationTaskId}
+              setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
             />
           }
         />
@@ -175,6 +178,8 @@ function App() {
               searchQuery={searchQuery}
               handleSearchChange={handleSearchChange}
               filteredTasks={filteredTasks}
+              deleteConfirmationTaskId={deleteConfirmationTaskId}
+              setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
             />
           }
         />
@@ -195,6 +200,8 @@ function App() {
               searchQuery={searchQuery}
               handleSearchChange={handleSearchChange}
               filteredTasks={filteredTasks}
+              deleteConfirmationTaskId={deleteConfirmationTaskId}
+              setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
             />
           }
         />
@@ -214,6 +221,8 @@ function App() {
               searchQuery={searchQuery}
               handleSearchChange={handleSearchChange}
               filteredTasks={filteredTasks}
+              deleteConfirmationTaskId={deleteConfirmationTaskId}
+              setDeleteConfirmationTaskId={setDeleteConfirmationTaskId}
             />
           }
         />

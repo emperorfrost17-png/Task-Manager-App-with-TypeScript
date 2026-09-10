@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import type { Task } from "../App";
 import type { ChangeEvent } from "react";
+import { DeleteConfirmation } from "../components/DeleteConfirmation";
 interface OverdueTasksProps {
   tasks: Task[];
   onOpenTaskModal: () => void;
@@ -20,6 +21,8 @@ interface OverdueTasksProps {
   searchQuery: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   filteredTasks: Task[];
+  deleteConfirmationTaskId: string | null;
+  setDeleteConfirmationTaskId: (taskId: string | null) => void;
 }
 export function OverdueTasks({
   tasks,
@@ -34,6 +37,8 @@ export function OverdueTasks({
   searchQuery,
   handleSearchChange,
   filteredTasks,
+  deleteConfirmationTaskId,
+  setDeleteConfirmationTaskId,
 }: OverdueTasksProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -161,7 +166,7 @@ export function OverdueTasks({
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleDeleteTask(task.id)}
+                              onClick={() => setDeleteConfirmationTaskId(task.id)}
                             >
                               <i
                                 className="fa-solid fa-trash-can"
@@ -170,6 +175,16 @@ export function OverdueTasks({
                               Delete
                             </button>
                           </div>
+                        )}
+                        {deleteConfirmationTaskId === task.id && (
+                          <DeleteConfirmation
+                            taskId={task.id}
+                            handleDeleteTask={handleDeleteTask}
+                            setDeleteConfirmationTaskId={
+                              setDeleteConfirmationTaskId
+                            }
+                            setOpenMenuId={setOpenMenuId}
+                          />
                         )}
                       </article>
                     );

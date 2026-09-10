@@ -2,18 +2,21 @@ import "./AddTask.css";
 import { useState } from "react";
 import dayjs from "dayjs";
 import type { ChangeEvent } from "react";
-import type { MouseEvent } from "react";
+import type { FormEvent } from "react";
 import type { Task } from "../App";
+import { useNavigate } from "react-router";
 interface AddTaskProps {
   onClose: () => void;
   tasks: Task[];
   setTasks: (tasks: Task[]) => void;
 }
 export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH">("MEDIUM");
   const [dueDate, setDueDate] = useState(dayjs().format("YYYY-MM-DD")); // Set default due date to today
+
   function savedTaskTitle(event: ChangeEvent<HTMLInputElement>) {
     setTitle(event.target.value);
   }
@@ -26,7 +29,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
   function savedTaskDueDate(event: ChangeEvent<HTMLInputElement>) {
     setDueDate(event.target.value);
   }
-  const addNewTask = (event: MouseEvent<HTMLButtonElement>) => {
+  const addNewTask = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Create a new task object with the current state values and a unique ID, then update the tasks state and close the modal.
     if (!title || !priority || !dueDate) {
@@ -47,11 +50,12 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
     ];
     setTasks(newTask);
     onClose();
+    navigate("/");
   };
 
   return (
     <>
-      <form className="add-task-page">
+      <form className="add-task-page" onSubmit={addNewTask}>
         <section
           className="add-task-modal"
           role="dialog"
@@ -133,11 +137,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
               Cancel
             </button>
 
-            <button
-              className="save-task-button"
-              type="button"
-              onClick={addNewTask}
-            >
+            <button className="save-task-button" type="submit">
               Add task
             </button>
           </div>

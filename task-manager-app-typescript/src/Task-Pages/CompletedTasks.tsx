@@ -3,6 +3,7 @@ import { Sidebar } from "../components/Sidebar";
 import { Completion } from "../components/Completion";
 import { Sorting } from "../components/Sorting";
 import { TaskCheckbox } from "../components/TaskCheckbox";
+import { DeleteConfirmation } from "../components/DeleteConfirmation";
 import type { Task } from "../App";
 import type { ChangeEvent } from "react";
 import dayjs from "dayjs";
@@ -21,6 +22,8 @@ interface CompletedTasksProps {
   searchQuery: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
   filteredTasks: Task[];
+  deleteConfirmationTaskId: string | null;
+  setDeleteConfirmationTaskId: (taskId: string | null) => void;
 }
 export function CompletedTasks({
   tasks,
@@ -36,6 +39,8 @@ export function CompletedTasks({
   searchQuery,
   handleSearchChange,
   filteredTasks,
+  deleteConfirmationTaskId,
+  setDeleteConfirmationTaskId,
 }: CompletedTasksProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -83,8 +88,8 @@ export function CompletedTasks({
                 <div>
                   <h2>Completed tasks</h2>
                   <p>
-                    {filteredTasks.filter((task) => task.completed).length} things in
-                    view
+                    {filteredTasks.filter((task) => task.completed).length}{" "}
+                    things in view
                   </p>
                 </div>
                 <div className="task-heading-actions">
@@ -131,7 +136,11 @@ export function CompletedTasks({
                               {task.priority}
                             </span>
                             <span>{dayjs(task.dueDate).format("MMM D")}</span>
-                            <span> Created At: {dayjs(task.createdAt).format("h:mm A")}</span>
+                            <span>
+                              {" "}
+                              Created At:{" "}
+                              {dayjs(task.createdAt).format("h:mm A")}
+                            </span>
                           </div>
                         </div>
                         <button
@@ -147,7 +156,7 @@ export function CompletedTasks({
                           <span aria-hidden="true">...</span>
                         </button>
                         {openMenuId === task.id && (
-                          <div className="task-options-menu" >
+                          <div className="task-options-menu">
                             <button
                               type="button"
                               onClick={() => onOpenEditTaskModal(task)}
@@ -156,7 +165,9 @@ export function CompletedTasks({
                             </button>
                             <button
                               type="button"
-                              onClick={() => handleDeleteTask(task.id)}
+                              onClick={() =>
+                                setDeleteConfirmationTaskId(task.id)
+                              }
                             >
                               <i
                                 className="fa-solid fa-trash-can"
@@ -165,6 +176,16 @@ export function CompletedTasks({
                               Delete
                             </button>
                           </div>
+                        )}
+                        {deleteConfirmationTaskId === task.id && (
+                          <DeleteConfirmation
+                            taskId={task.id}
+                            handleDeleteTask={handleDeleteTask}
+                            setDeleteConfirmationTaskId={
+                              setDeleteConfirmationTaskId
+                            }
+                            setOpenMenuId={setOpenMenuId}
+                          />
                         )}
                       </article>
                     );

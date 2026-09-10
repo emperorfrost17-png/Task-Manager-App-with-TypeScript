@@ -1,6 +1,7 @@
 import "./Sidebar.css";
 import dayjs from "dayjs";
 import { NavLink } from "react-router";
+
 import type { Task } from "../App";
 interface SidebarProps {
   filteredTasks: Task[];
@@ -32,7 +33,12 @@ export function Sidebar({
           </div>
         </div>
 
-        <button className="workspace-button" onClick={onOpenTaskModal}>
+        <button
+          className="workspace-button"
+          onClick={() => {
+            onOpenTaskModal();
+          }}
+        >
           + New task
         </button>
 
