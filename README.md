@@ -6,7 +6,7 @@ Task app I built to learn React + TypeScript.
 
 ## What It Does
 
-- Make tasks, check them off, delete them
+- Make tasks, Edit tasks check them off, delete them
 - Filter by status or search
 - Works offline in your browser
 
@@ -39,7 +39,7 @@ npm run dev
 
 - No backend (just localStorage)
 - No tests
-- Not deployed yet
+
 
 ## Next
 
