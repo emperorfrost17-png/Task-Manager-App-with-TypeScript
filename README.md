@@ -2,7 +2,7 @@
 
 Task app I built to learn React + TypeScript.
 
-[Live Demo](link) | [GitHub](link)
+[Live Demo]([link](https://task-manager-app-with-type-script-b.vercel.app/)) | [GitHub](link)
 
 ## What It Does
 
