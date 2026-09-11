@@ -18,7 +18,7 @@ Also focused on accessibility since I read somewhere it matters. Made sure keybo
 
 ## Tech
 
-React + TypeScript + Vite
+React + TypeScript + vanilla css + Vite
 
 ## Run It
 
