@@ -57,7 +57,7 @@ export function TaskList({
                 </span>
                 <span
                   className={
-                    task.daysOverdue !== undefined ? "overdue-date" : undefined
+                    task.daysOverdue !== undefined ? "overdue-date" : "due-date"
                   }
                 >
                   {task.daysOverdue !== undefined

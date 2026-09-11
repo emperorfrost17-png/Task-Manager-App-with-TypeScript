@@ -189,6 +189,14 @@
   color: #dc2626;
 }
 
+.due-date {
+  padding: 3px 7px;
+  border: 1px solid #ead6bc;
+  border-radius: 999px;
+  background: #fffdfa;
+  color: #7f6f88;
+}
+
 .priority-tag {
   padding: 3px 7px;
   border-radius: 999px;
