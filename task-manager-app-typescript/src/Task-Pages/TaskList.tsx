@@ -68,7 +68,7 @@ export function TaskList({
                 </span>
                 <span>
                   {" "}
-                  Created At: {dayjs(task.createdAt).format("dddd, MMMM D, YYYY")}
+                  Created : {dayjs(task.createdAt).format("dddd, MMMM D, YYYY")} {dayjs(task.createdAt).format("h:mm A")} 
                 </span>
               </div>
             </div>
