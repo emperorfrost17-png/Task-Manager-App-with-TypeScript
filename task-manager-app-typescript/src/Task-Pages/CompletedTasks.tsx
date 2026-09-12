@@ -17,7 +17,7 @@ interface CompletedTasksProps {
   handleClearCompletedTasks: () => void;
   openMenuId: string | null;
   setOpenMenuId: (taskId: string | null) => void;
-  sortBy: string;
+  sortBy: "dateCreated" | "priority" | "dueDate" | "title";
   handleSortChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   searchQuery: string;
   handleSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;

@@ -1,7 +1,7 @@
 import "./Sorting.css";
 interface SortingProps {
   handleSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  sortBy: string;
+  sortBy: "dateCreated" | "priority" | "dueDate" | "title";
 }
 export function Sorting({ handleSortChange, sortBy }: SortingProps) {
 

@@ -29,9 +29,11 @@ function App() {
   const [isEditTaskModalOpen, setIsEditTaskModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState("dateCreated"); // Default sorting by "none"
+  const [sortBy, setSortBy] = useState<"dateCreated" | "priority" | "dueDate" | "title">("dateCreated"); // Default sorting by "dateCreated"
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const [deleteConfirmationTaskId, setDeleteConfirmationTaskId] = useState<string | null>(null); // State for the task ID to be deleted
+  const [deleteConfirmationTaskId, setDeleteConfirmationTaskId] = useState<
+    string | null
+  >(null); // State for the task ID to be deleted
   const onOpenEditTaskModal = (task: Task) => {
     setEditingTask(task); // Set the task to be edited in state
     setIsEditTaskModalOpen(true);
@@ -70,7 +72,7 @@ function App() {
     );
   };
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const nextSortBy = event.target.value;
+    const nextSortBy = event.target.value as "dateCreated" | "priority" | "dueDate" | "title";
     setSortBy(nextSortBy);
   };
   const sortedTasks = [...tasks].sort((a, b) => {
@@ -135,7 +137,6 @@ function App() {
           onClose={onCloseEditTaskModal}
           setTasks={setTasks}
           task={editingTask} // Pass the task to be edited as a prop to the EditTask component
-          
         />
       )}
 
