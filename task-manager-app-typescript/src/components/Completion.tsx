@@ -12,17 +12,26 @@ export function Completion({ tasks }: CompletionProps) {
   return (
     <aside className="body-side">
       <div className="day-progress">
-        <div
-          className="progress-ring"
-          style={
-            {
-              "--completion": `${completionPercentage}%`,
-            } as React.CSSProperties
-          }
-          aria-label={`${completionPercentage}% complete`}
-        >
-          <span className="progress-text">{completionPercentage}%</span>
-        </div>
+        <svg className="progress-ring" viewBox="0 0 44 44">
+          <circle cx="22" cy="22" r="18" className="progress-bg" />
+          <circle
+            cx="22"
+            cy="22"
+            r="18"
+            className="progress-fill"
+            style={{
+              strokeDashoffset: 113 - (113 * completionPercentage) / 100,
+            }}
+          />
+          <text
+            x="22"
+            y="26"
+            className="progress-text"
+            transform="rotate(90 22 22)"
+          >
+            {completionPercentage}%
+          </text>
+        </svg>
         <div>
           <p>YOUR DAY</p>
           <strong>

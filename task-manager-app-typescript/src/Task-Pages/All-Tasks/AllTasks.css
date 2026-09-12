@@ -168,28 +168,31 @@
 .progress-ring {
   width: 60px;
   height: 60px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: conic-gradient(
-    #ffb51b var(--completion),
-    #f0e9df var(--completion)
-  );
-  transition: background 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  transform: rotate(-90deg);
+}
+
+.progress-bg {
+  fill: none;
+  stroke: #f0e9df;
+  stroke-width: 4;
+}
+
+.progress-fill {
+  fill: none;
+  stroke: #ffb51b;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 113;
+  stroke-dashoffset: 113;
+  transition: stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-text {
-  display: grid;
-  place-items: center;
-  width: calc(100% - 8px);
-  height: calc(100% - 8px);
-  border-radius: 50%;
-  background: #fffdfa;
-  color: #34283b;
+  fill: #34283b;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 12px;
   font-weight: 700;
+  text-anchor: middle;
 }
 
 .day-progress p {
