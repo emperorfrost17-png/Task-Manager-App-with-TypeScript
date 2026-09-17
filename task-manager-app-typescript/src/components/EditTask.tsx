@@ -90,6 +90,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
           <input
             required
             id="edit-task-name"
+            data-testid="test-edit-task-title"
             type="text"
             value={newTitle}
             onChange={handleTitleChange}
@@ -102,6 +103,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
           </label>
           <textarea
             id="edit-task-notes"
+            data-testid="test-edit-task-description"
             rows={3}
             value={newDescription}
             onChange={handleDescriptionChange}
@@ -113,6 +115,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
             <label htmlFor="edit-task-priority">Priority</label>
             <select
               id="edit-task-priority"
+              data-testid="test-edit-task-priority"
               value={newPriority}
               onChange={handlePriorityChange}
             >
@@ -126,6 +129,7 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
             <label htmlFor="edit-task-due-date">Due date</label>
             <input
               id="edit-task-due-date"
+              data-testid="test-edit-task-due-date"
               type="date"
               value={newDueDate}
               onChange={handleDueDateChange}
@@ -134,10 +138,10 @@ export function EditTask({ onClose, setTasks, task }: EditTaskProps) {
         </div>
 
         <div className="edit-task-actions">
-          <button className="edit-task-cancel" type="button" onClick={onClose}>
+          <button className="edit-task-cancel" data-testid="test-edit-task-cancel" type="button" onClick={onClose}>
             Cancel
           </button>
-          <button className="edit-task-save" type="submit">
+          <button className="edit-task-save" data-testid="test-edit-task-save" type="submit">
             Save changes
           </button>
         </div>

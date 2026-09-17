@@ -40,7 +40,7 @@ describe("AddTask componenting", () => {
       </MemoryRouter>,
     );
     return {
-      form: screen.getByRole("form"),
+      form: screen.getByRole("dialog"),
       titleInput: screen.getByTestId("test-task-title"),
       descriptionInput: screen.getByTestId("test-task-description"),
       prioritySelect: screen.getByTestId("test-task-priority"),
