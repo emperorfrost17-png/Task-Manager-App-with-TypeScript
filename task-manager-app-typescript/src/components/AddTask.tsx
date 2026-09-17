@@ -54,7 +54,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
 
   return (
     <>
-      <form className="add-task-page" onSubmit={addNewTask}>
+      <form className="add-task-page" role="form" onSubmit={addNewTask}>
         <section
           className="add-task-modal"
           role="dialog"
@@ -82,6 +82,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
               value={title}
               onChange={savedTaskTitle}
               id="task-title"
+              data-testid="test-task-title"
               type="text"
               placeholder="Give it a clear, kind name"
             />
@@ -93,6 +94,8 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
             </label>
             <textarea
               id="task-notes"
+              data-testid="test-task-description"
+
               placeholder="A little context for future you"
               rows={3}
               value={description}
@@ -107,6 +110,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
                 id="task-priority"
                 value={priority}
                 onChange={savedTaskPriority}
+                data-testid="test-task-priority"
               >
                 <option value="LOW">Low - gentle pace</option>
                 <option value="MEDIUM">Medium - worth attention</option>
@@ -122,6 +126,7 @@ export function AddTask({ onClose, tasks, setTasks }: AddTaskProps) {
                 placeholder="27/08/2026"
                 value={dueDate}
                 onChange={savedTaskDueDate}
+                data-testid="test-task-due-date"
               />
             </div>
           </div>
